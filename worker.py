@@ -41,14 +41,6 @@ model = "gpt-4o"
 api_key = "9I4UEJweVUdih04Uv8AXcAxs5H8jSQRfwaugcSQYHcI882wSpFvqJQQJ99BAACL93NaXJ3w3AAABACOGkv4f"  # Replace with your actual API key
 api_version = "2023-06-01-preview"
 
-import openai
-from openai import AzureOpenAI
-
-# Azure OpenAI API details
-api_base = "https://thisisoajo.openai.azure.com/"  # Replace with your Azure OpenAI resource URL
-model = "gpt-4o"
-api_key = "9I4UEJweVUdih04Uv8AXcAxs5H8jSQRfwaugcSQYHcI882wSpFvqJQQJ99BAACL93NaXJ3w3AAABACOGkv4f"  # Replace with your actual API key
-api_version = "2023-06-01-preview"
 
 # Create the client once.
 client = AzureOpenAI(
