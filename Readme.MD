@@ -10,6 +10,8 @@ IBMeal is a **Telegram-based meal ordering platform** that provides institutiona
 - **Integrated Payment System** – Users can fund their accounts via **Flask API** or manually through the admin panel.  
 - **Dispatch System** – Riders receive orders, verify order numbers, and deliver meals.  
 
+Here is a link to the slide deck: [View Slide Deck](https://docs.google.com/presentation/d/1X02nVwF5IqeThPnMOuYzv_jjisxALgRYAh2ax-qt25s/edit?usp=sharing)
+
 ## System Flow  
 ```plaintext
                    +----------------------+
