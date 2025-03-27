@@ -1,0 +1,33 @@
+2024-04-03 10:57:36,905 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8081
+ * Running on http://192.168.1.28:8081
+2024-04-03 10:57:36,905 - INFO - [33mPress CTRL+C to quit[0m
+2024-04-03 10:59:35,156 - INFO - Received the following query parameter notes=00-55-78, len=8
+2024-04-03 10:59:35,170 - INFO - query result :: 0
+2024-04-03 10:59:35,170 - INFO - message_result :: {'is_authorized': False}
+2024-04-03 10:59:35,171 - INFO - 127.0.0.1 - - [03/Apr/2024 10:59:35] "GET /student/isauthorized?notes=00-55-78 HTTP/1.1" 200 -
+2024-04-03 10:59:37,370 - INFO - 127.0.0.1 - - [03/Apr/2024 10:59:37] "[33mGET /cart.json HTTP/1.1[0m" 404 -
+2024-04-03 10:59:37,689 - INFO - 127.0.0.1 - - [03/Apr/2024 10:59:37] "[33mGET /student/highLightTitle.png HTTP/1.1[0m" 404 -
+2024-04-03 11:00:12,462 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8081
+ * Running on http://192.168.1.28:8081
+2024-04-03 11:00:12,462 - INFO - [33mPress CTRL+C to quit[0m
+2024-04-03 11:00:12,469 - INFO -  * Restarting with stat
+2024-04-03 11:00:12,887 - WARNING -  * Debugger is active!
+2024-04-03 11:00:12,895 - INFO -  * Debugger PIN: 443-047-181
+2024-04-03 11:00:15,015 - INFO - Received the following query parameter notes=00-55-78, len=8
+2024-04-03 11:00:15,019 - INFO - query result :: 0
+2024-04-03 11:00:15,019 - INFO - message_result :: {'is_authorized': False}
+2024-04-03 11:00:15,020 - INFO - 127.0.0.1 - - [03/Apr/2024 11:00:15] "GET /student/isauthorized?notes=00-55-78 HTTP/1.1" 200 -
+2024-04-03 11:00:16,041 - INFO - 127.0.0.1 - - [03/Apr/2024 11:00:16] "[33mGET /cart.json HTTP/1.1[0m" 404 -
+2024-04-03 11:00:16,324 - INFO - 127.0.0.1 - - [03/Apr/2024 11:00:16] "[33mGET /student/highLightTitle.png HTTP/1.1[0m" 404 -
+2024-04-03 11:01:39,425 - INFO - Received the following query parameter notes=00-55-7999, len=10
+2024-04-03 11:01:39,427 - INFO - query result :: 0
+2024-04-03 11:01:39,427 - INFO - message_result :: {'is_authorized': False}
+2024-04-03 11:01:39,427 - INFO - 127.0.0.1 - - [03/Apr/2024 11:01:39] "GET /student/isauthorized?notes=00-55-7999 HTTP/1.1" 200 -
+2024-04-03 11:01:40,220 - INFO - 127.0.0.1 - - [03/Apr/2024 11:01:40] "[33mGET /cart.json HTTP/1.1[0m" 404 -
+2024-04-03 11:01:40,583 - INFO - 127.0.0.1 - - [03/Apr/2024 11:01:40] "[33mGET /student/highLightTitle.png HTTP/1.1[0m" 404 -
+2024-04-03 11:02:19,052 - INFO -  * Detected change in 'c:\\Users\\Ope Jeremiah\\Documents\\IBTROS\\application(flask)_for_rfid.py', reloading
+2024-04-03 11:02:19,096 - INFO -  * Restarting with stat

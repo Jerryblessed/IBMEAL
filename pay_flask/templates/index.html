@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Users via Paystack</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border: none;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .hidden {
+            display: none;
+        }
+        .selected-user {
+            background-color: #ff5722;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .user-button {
+            background-color: #ddd;
+            color: black;
+            padding: 10px;
+            border: none;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .user-button:hover {
+            background-color: #ccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Credit User</h2>
+        <div id="userDetails">
+            {% if user %}
+                <div class="selected-user">
+                    Selected User: {{ user.first_name }} {{ user.last_name }} (@{{ user.username }})
+                </div>
+                <input type="hidden" id="selectedUserId" value="{{ user.user_id }}">
+                <div id="paymentSection">
+                    <h3>Enter Amount</h3>
+                    <input type="number" id="amount" placeholder="Enter amount in Naira">
+                    <button onclick="proceedToPayment()">Proceed to Paystack</button>
+                </div>
+            {% else %}
+                <input type="text" id="name" placeholder="Enter first name, last name, or username">
+                <button onclick="searchUser()">Search</button>
+                <div id="userSelection" class="hidden">
+                    <h3>Select User</h3>
+                    <div id="userList"></div>
+                </div>
+                <div id="paymentSection" class="hidden">
+                    <h3>Enter Amount</h3>
+                    <input type="number" id="amount" placeholder="Enter amount in Naira">
+                    <button onclick="proceedToPayment()">Proceed to Paystack</button>
+                </div>
+            {% endif %}
+        </div>
+        <button onclick="resetSearch()">Credit Other</button>
+    </div>
+
+    <script>
+        let selectedUserId = document.getElementById('selectedUserId')?.value || null;
+
+        function searchUser() {
+            let name = document.getElementById('name').value;
+            fetch('/search', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name })
+            })
+            .then(response => response.json())
+            .then(users => {
+                let userList = document.getElementById('userList');
+                userList.innerHTML = '';
+                if (users.length === 0) {
+                    alert('No users found!');
+                    return;
+                }
+                users.forEach(user => {
+                    let btn = document.createElement('button');
+                    btn.classList.add('user-button');
+                    btn.innerText = `${user.first_name} ${user.last_name} (@${user.username})`;
+                    btn.onclick = () => selectUser(user.user_id, btn);
+                    userList.appendChild(btn);
+                });
+                document.getElementById('userSelection').classList.remove('hidden');
+            });
+        }
+
+        function selectUser(userId, button) {
+            selectedUserId = userId;
+            document.getElementById('paymentSection').classList.remove('hidden');
+            document.querySelectorAll('.user-button').forEach(btn => btn.style.backgroundColor = '#ddd');
+            button.style.backgroundColor = '#ff5722';
+            button.style.color = 'white';
+        }
+
+        function proceedToPayment() {
+            let amount = document.getElementById('amount').value;
+            if (!amount || !selectedUserId) {
+                alert('Please select a user and enter amount.');
+                return;
+            }
+            let email = prompt('Enter your email for payment');
+            if (!validateEmail(email)) {
+                alert('Invalid email format');
+                return;
+            }
+            fetch('/pay', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user_id: selectedUserId, amount, email })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    window.location.href = data.pay_url;
+                } else {
+                    alert('Payment initialization failed');
+                }
+            });
+        }
+
+        function validateEmail(email) {
+            let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function resetSearch() {
+            window.location.href = "/";
+        }
+    </script>
+</body>
+</html>
